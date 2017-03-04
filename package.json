@@ -1,0 +1,8 @@
+{
+    "name": "node-api",
+    "main": "server.js",
+    "dependencies": {
+        "express": "*",
+        "Robinhood": "0.8.0"
+    }
+}
