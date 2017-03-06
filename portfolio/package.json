@@ -3,6 +3,7 @@
     "main": "server.js",
     "dependencies": {
         "express": "*",
-        "Robinhood": "0.8.0"
+        "body-parser": "*",
+        "robinhood": "0.8.0"
     }
 }

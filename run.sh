@@ -1,0 +1,1 @@
+docker run -P patrocinio/finance_portfolio

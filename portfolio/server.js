@@ -21,7 +21,11 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
+router.get('/refresh', function(req, res) {
+	robinhood.retrievePortfolio(req, res)
+});
+
+router.get('/portfolio', function(req, res) {
 	robinhood.getPortfolio (res)
 });
 
@@ -29,11 +33,10 @@ router.get('/', function(req, res) {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', router);
 
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-robinhood.retrievePortfolio()
 console.log('Magic happens on port ' + port);
 

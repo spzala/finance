@@ -1,10 +1,5 @@
 //The username and password you use to sign into the robinhood app.
 
-var credentials = {
-    username: process.env.ROBINHOOD_USERNAME,
-    password: process.env.ROBINHOOD_PASSWORD
-};
-
 var robinhood = require('robinhood')
 
 stocks = {}
@@ -49,12 +44,25 @@ function retrievePositions (err, response, body) {
         
 } 
 
+function obtainAuth (req) {
+
+    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+    const a = new Buffer(b64auth, 'base64').toString().split(':')
+    login = a[0]
+    password = a[1]
+
+    return {"username" : login, "password": password}
+}
+
 
 module.exports = {
-    retrievePortfolio: function(res) {
+    retrievePortfolio: function(req, res) {
+
+        credentials = obtainAuth(req)
+
         Robinhood = robinhood(credentials, function(){
 
-            console.log ("Logging in to Robinhood")
+            console.log ("Logging in to Robinhood username: " + credentials["username"] + " password: " + credentials["password"])
 
             //Robinhood is connected and you may begin sending commands to the api.
             Robinhood.accounts(function(err, response, body){
@@ -65,6 +73,7 @@ module.exports = {
 
                     console.log ("Retrieving positions")
                     Robinhood.url(positions, retrievePositions)
+                    res.send ("Portfolio updated")
                 }
             });
         });
