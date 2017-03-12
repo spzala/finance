@@ -1,6 +1,6 @@
 ZIP_FILE="http://investexcel.net/wp-content/uploads/2015/01/Yahoo-Ticker-Symbols-Jan-2016.zip"
 OUTPUT_FILE="/tmp/tickers.zip"
-OUTPUT_DIR="/tmp/tickers"
+OUTPUT_DIR="/tmp/tickers/"
 TICKER_FILE=tickers.xlsx
 
 wget $ZIP_FILE -O $OUTPUT_FILE

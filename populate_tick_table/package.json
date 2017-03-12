@@ -1,0 +1,7 @@
+{
+    "name": "populate-table",
+    "main": "populate_table.js",
+    "dependencies": {
+        "excel-parser": "*"
+    }
+}
