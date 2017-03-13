@@ -1,21 +1,24 @@
-const TICKERS="/tmp/tickers/tickers.xlsx"
+const TICKERS="tickers.xlsx"
 
 var excel = require('excel-parser')
 
 ticks = []
 
 function retrieveTicks () {
-	console.log ("Opening " + TICKERS)
+//  process.chdir("node_modules/excel-parser")
+	console.log ("Opening " + TICKERS + " current directory " + process.cwd())
 	excel.parse({
   		inFile: TICKERS, 
   		worksheet: 'Stock'
 	}, function(err, records){
-  	if(err) console.error(err);
-  		for (var i = 0; i < records.length; i++) {
-        tick = records[i][0]
-        console.log ("Tick:" + tick)
-        ticks[i] = tick
-  		}
+  	if(err) console.error("Error: " + err);
+    if (records != undefined) {
+    		for (var i = 0; i < records.length; i++) {
+          tick = records[i][0]
+          console.log ("Tick:" + tick)
+          ticks[i] = tick
+  		  }
+      }
 
 	});
 }

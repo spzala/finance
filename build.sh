@@ -11,8 +11,6 @@ cd tick_table
 ./create_table.sh
 cd ..
 
-cd ticks
-docker build -t patrocinio/finance_ticks .
-cd ..
+ticks/build.sh
 
 
