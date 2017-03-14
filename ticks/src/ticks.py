@@ -1,7 +1,25 @@
 from openpyxl import load_workbook
-print "Opening file..."
-wb = load_workbook('/tmp/tickers/tickers.xlsx')
+from flask import Flask
+import json
+
+app = Flask(__name__)
+
+print ("Opening file...")
+
+result = []
+wb = load_workbook('/tmp/tickers.xlsx')
 stocks = wb['Stock']
 for row in stocks.rows:
 	cell = row[0]
-	print cell.value
+	result.append (cell.value)
+
+@app.route("/ticks")
+def getTicks():
+	return json.dumps(result)
+
+@app.route('/')
+def index():
+    return 'Index Page'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
