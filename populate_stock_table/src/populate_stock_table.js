@@ -47,8 +47,6 @@ function populateTable () {
     retrieveStocks ()
 }
 
-populateTable()
-
 module.exports = {
     populateTable: function(req, res) {
         console.log ("Populating table...")
