@@ -1,5 +1,2 @@
-docker run -P -d patrocinio/finance_portfolio 
-
-docker run -P -d patrocinio/finance_ticks
-
-docker ps
+docker-compose -p finance up
+docker-compose -p finance ps

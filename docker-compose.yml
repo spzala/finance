@@ -1,15 +1,27 @@
 version: "3"
 
 services:
-  stocks:
-    image: ${DTR}/finance_stocks:${ENV}-${BUILD_NUMBER}
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=banana
+      - MYSQL_DATABASE=stock
+
+  stock_table:
+    image: ${DTR}/finance_stock_table:${ENV}-${BUILD_NUMBER}
+    depends_on:
+      - mysql
     ports:
       - "5000"
-
-  populate_stock_table:
-    image: ${DTR}/finance_populate_stock_table:${ENV}-${BUILD_NUMBER}
-    depends_on:
-      - stocks
     environment:
-      - STOCK_URL=http://stock:5000
+      - MYSQL_HOST=mysql
+      - MYSQL_PASSWORD=banana
+      - MYSQL_PORT=3306
+
+  stock_spreadsheet:
+    image: ${DTR}/finance_stock_spreadsheet:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "5000"
 
