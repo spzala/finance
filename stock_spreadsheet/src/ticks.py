@@ -13,8 +13,8 @@ for row in stocks.rows:
 	cell = row[0]
 	result.append (cell.value)
 
-@app.route("/ticks")
-def getTicks():
+@app.route("/stocks")
+def getStocks():
 	return json.dumps(result)
 
 @app.route('/')

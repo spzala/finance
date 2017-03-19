@@ -9,11 +9,6 @@ cd all_stocks
 ./unzip_file.sh
 cd ..
 
-echo Building tick table
-cd create_stock_table
-./create_table.sh
-cd ..
-
 echo Building stock table
 cd stock_table
 ./build.sh
@@ -23,5 +18,11 @@ echo Building stock spreadsheet
 cd stock_spreadsheet
 ./build.sh
 cd ..
+
+echo Building populate stock table
+cd populate_stock_table
+./build.sh
+cd ..
+
 
 
