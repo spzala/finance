@@ -24,5 +24,11 @@ cd populate_stock_table
 ./build.sh
 cd ..
 
+echo Building stock price
+cd stock_price
+./build.sh
+cd ..
+
+
 
 

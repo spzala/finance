@@ -25,6 +25,11 @@ services:
     ports:
       - "5000"
 
+  stock_price:
+    image: ${DTR}/finance_stock_price:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "8080"
+
   populate_stock_table:
     image: ${DTR}/finance_populate_stock_table:${ENV}-${BUILD_NUMBER}
     ports:
