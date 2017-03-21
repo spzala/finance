@@ -8,11 +8,14 @@ function retrieveStockPrice (stock, res) {
         symbol : stock,
         fields: ['a', 'b', 'b2', 'b3']
     }, function (err, snapshot) {
+        console.log ("Got response")
         if (err) {
             console.log ("Error during retrieveStockPrice for stock: " + stock + ":" + err)
         }
         if (snapshot != undefined && snapshot.ask != null) {
-            res.send ("symbol: " + snapshot.symbol + " ask: " + snapshot.ask)
+            res.json ({symbol: snapshot.symbol, price: snapshot.ask})
+        } else {
+            res.status(404).send ("Symbol not found")
         }
     })
 }
