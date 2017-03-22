@@ -36,8 +36,8 @@ services:
       - "5672:5672"
 
 
-  populate_stock_table:
-    image: ${DTR}/finance_populate_stock_table:${ENV}-${BUILD_NUMBER}
+  pump_stock_symbol:
+    image: ${DTR}/finance_pump_stock_symbol:${ENV}-${BUILD_NUMBER}
     ports:
       - "8080"
     depends_on:
@@ -45,5 +45,6 @@ services:
       - queue
     environment:
       - STOCK_URL=http://stock_spreadsheet:5000
+      - QUEUE_HOST=queue
 
 

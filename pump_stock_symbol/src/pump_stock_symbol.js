@@ -1,6 +1,6 @@
 var mysql      = require('mysql');
 var connection;
-const stockSpreadsheetURL = process.env.STOCK_URL || "http://localhost:32817"
+const stockSpreadsheetURL = process.env.STOCK_URL || "http://localhost:32837"
 
 var Client = require('node-rest-client').Client;
 var client = new Client();
@@ -31,8 +31,8 @@ function retrieveStocks (ch, q) {
 }
 
 function createMQConnection() {
-    console.log ("Connecting to MQ")
-    amqp.connect('amqp://localhost', function(err, conn) {
+    console.log ("Connecting to MQ at " + queueHost)
+    amqp.connect('amqp://' + queueHost, function(err, conn) {
         console.log ("Creating channel")
         conn.createChannel(function(err, ch) {
             var q = 'stocks';
@@ -44,8 +44,6 @@ function createMQConnection() {
     });
 
 }
-
-createMQConnection()
 
 function populateTable () {
     createMQConnection ()
