@@ -30,12 +30,20 @@ services:
     ports:
       - "8080"
 
+  queue:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+
+
   populate_stock_table:
     image: ${DTR}/finance_populate_stock_table:${ENV}-${BUILD_NUMBER}
     ports:
       - "8080"
     depends_on:
       - stock_spreadsheet
+      - queue
     environment:
       - STOCK_URL=http://stock_spreadsheet:5000
+
 
