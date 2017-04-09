@@ -44,7 +44,7 @@ function retrieveStock (res, symbol) {
 }
 
 console.log ("Waiting a few seconds to create connection")
-setTimeout(createDBConnection, 10000)
+setTimeout(createDBConnection, 20000)
 
 module.exports = {
     get: function(req, res) {
