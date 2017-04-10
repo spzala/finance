@@ -18,41 +18,41 @@ services:
       - MYSQL_PASSWORD=banana
       - MYSQL_PORT=3306
 
-#  stock_table:
-#    image: ${DTR}/finance_stock_table:${ENV}-${BUILD_NUMBER}
-#    depends_on:
-#      - mysql
-#    ports:
-#      - "8080"
-#    environment:
-#      - MYSQL_HOST=mysql
-#      - MYSQL_PASSWORD=banana
-#      - MYSQL_PORT=3306
+  stock_table:
+    image: ${DTR}/finance_stock_table:${ENV}-${BUILD_NUMBER}
+    depends_on:
+      - mysql
+    ports:
+      - "8080"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PASSWORD=banana
+      - MYSQL_PORT=3306
 
-#  stock_spreadsheet:
-#    image: ${DTR}/finance_stock_spreadsheet:${ENV}-${BUILD_NUMBER}
-#    ports:
-#      - "5000"
+  stock_spreadsheet:
+    image: ${DTR}/finance_stock_spreadsheet:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "5000"
 
-#  stock_price:
-#    image: ${DTR}/finance_stock_price:${ENV}-${BUILD_NUMBER}
-#    ports:
-#      - "8080"
+  stock_price:
+    image: ${DTR}/finance_stock_price:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "8080"
 
-#  queue:
-#    image: rabbitmq
-#    ports:
-#      - "5672:5672"
+  queue:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
 
-#  pump_stock_symbol:
-#    image: ${DTR}/finance_pump_stock_symbol:${ENV}-${BUILD_NUMBER}
-#    ports:
-#      - "8080"
-#    depends_on:
-#      - stock_spreadsheet
-#      - queue
-#    environment:
-#      - STOCK_URL=http://stock_spreadsheet:5000
-#      - QUEUE_HOST=queue
+  pump_stock_symbol:
+    image: ${DTR}/finance_pump_stock_symbol:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "8080"
+    depends_on:
+      - stock_spreadsheet
+      - queue
+    environment:
+      - STOCK_URL=http://stock_spreadsheet:5000
+      - QUEUE_HOST=queue
 
 
