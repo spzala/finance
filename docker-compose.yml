@@ -18,8 +18,19 @@ services:
       - MYSQL_PASSWORD=banana
       - MYSQL_PORT=3306
 
-  stock_table:
-    image: ${DTR}/finance_stock_table:${ENV}-${BUILD_NUMBER}
+  stock_table_get:
+    image: ${DTR}/finance_stock_table_get:${ENV}-${BUILD_NUMBER}
+    depends_on:
+      - mysql
+    ports:
+      - "8080"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PASSWORD=banana
+      - MYSQL_PORT=3306
+
+  stock_table_set:
+    image: ${DTR}/finance_stock_table_set:${ENV}-${BUILD_NUMBER}
     depends_on:
       - mysql
     ports:
@@ -54,5 +65,15 @@ services:
     environment:
       - STOCK_URL=http://stock_spreadsheet:5000
       - QUEUE_HOST=queue
+
+  process_stock_symbol:
+    image: ${DTR}/finance_process_stock_symbol:${ENV}-${BUILD_NUMBER}
+    ports:
+      - "5000"
+    depends_on:
+      - queue
+    environment:
+      - QUEUE_HOST=queue
+
 
 

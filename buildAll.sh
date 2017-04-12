@@ -13,8 +13,8 @@ cd all_stocks
 ./unzip_file.sh
 cd ..
 
-echo Building stock table
-cd stock_table
+echo Building stock table get
+cd stock_table_get
 ./build.sh
 cd ..
 
