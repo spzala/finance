@@ -1,10 +1,10 @@
-FROM python:latest
+FROM node:latest
 
 RUN mkdir -p /usr/src/app 
 WORKDIR /usr/src/app
 COPY src/ /usr/src/app
 
-EXPOSE 5000
-RUN pip install flask
-RUN pip install openpyxl
-CMD ["python", "ticks.py"]
+EXPOSE 8080
+RUN npm install
+CMD ["npm", "start"]
+

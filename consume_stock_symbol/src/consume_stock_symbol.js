@@ -7,10 +7,12 @@ var amqp = require('amqplib/callback_api');
 
 const queueHost = process.env.QUEUE_HOST || "localhost"
 
+function consumeStock(msg) {
+    console.log(" [x] Received %s", msg.content.toString());   
+}
+
 function retrieveStocks (ch, q) {
-    ch.consume(q, function(msg) {
-        console.log(" [x] Received %s", msg.content.toString());
-    }, {noAck: true});
+    ch.consume(q, consumeStock, {noAck: true});
 }
 
 function createMQConnection() {
