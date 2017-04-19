@@ -7,4 +7,5 @@ EXPOSE 5000
 RUN pip install flask
 RUN pip install openpyxl
 RUN pip install pika
+RUN pip install python-rest-client
 CMD ["python", "process_stock.py"]
