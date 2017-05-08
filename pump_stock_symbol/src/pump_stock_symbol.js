@@ -24,7 +24,9 @@ function retrieveStocks (ch, q) {
     client.get(url, function (data, response) {
         stocksStr = data.toString('utf8')
         stocks = JSON.parse(stocksStr)
-        for (var i = 0; i < stocks.length; i++) {
+        console.log ("Stocks length: " + stocks.length)
+        for (var i = 0; i < stocks.length; i++) {   
+//        for (var i = 0; i < 20; i++) {
             retrieveStock(ch, q, stocks[i])
         }
     });
@@ -33,14 +35,18 @@ function retrieveStocks (ch, q) {
 function createMQConnection() {
     console.log ("Connecting to MQ at " + queueHost)
     amqp.connect('amqp://' + queueHost, function(err, conn) {
-        console.log ("Creating channel")
-        conn.createChannel(function(err, ch) {
-            var q = 'stocks';
+        if (err) {
+            console.log ("Error: " + err)
+        } else {
+            console.log ("Creating channel")
+            conn.createChannel(function(err, ch) {
+                var q = 'stocks';
 
-            ch.assertQueue(q, {durable: false});
+                ch.assertQueue(q, {durable: false});
 
-            retrieveStocks(ch, q)
-        });
+                retrieveStocks(ch, q)
+            });
+        }
     });
 
 }
@@ -56,3 +62,6 @@ module.exports = {
         res.send ("Table populated")
     }
 }
+
+console.log ("Waiting a few seconds...")
+setTimeout (populateTable, 10000)

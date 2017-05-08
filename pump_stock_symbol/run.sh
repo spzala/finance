@@ -1,0 +1,3 @@
+echo Starting pump_stock_symbol...
+cid=$(docker run -P -d patrocinio/finance_pump_stock_symbol:dev-1)
+docker logs $cid

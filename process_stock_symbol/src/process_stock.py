@@ -10,25 +10,19 @@ app = Flask(__name__)
 
 channel_name = "stocks"
 
-base_url = "http://stock_price:8080/stockPrice/GOOG"
+base_url = "http://stock_price:8080/stockPrice/"
 
 def callback(ch, method, properties, body):
-	resp = requests.get(base_url)
-	status = resp.status_code
-
-# check that we either got a successful response (200) or a previously retrieved, but still valid response (304)
-	if status == '200' or status == '304':
-		print 'Received response'
-#    reviews = toList(json.loads(resp[u'body'])[u'reviews'],u'reviewData')
-#    reviewerLists = map(uncompletedReviewers,reviews)
-#    reviewers = reduce(lambda a, b: set(a).union(set(b)), reviewerLists, set())
-#    print 'Incomplete Reviewers: '
-#    for r in reviewers:
-#        print '    ',r
-	else:
-		print 'Error status code: ', status
-
+	symbol = str(body, 'utf-8')
+	url = base_url + symbol
 	print(" [x] Received %r" % body)
+	resp = requests.get(url)
+	status = resp.status_code
+	if status == 200 or status == 304:
+		print('Received response')
+	else:
+		print('Error status code: ', status)
+
 
 def consume():
 	print('Consuming stocks')
