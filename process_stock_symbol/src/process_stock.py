@@ -5,6 +5,7 @@ import pika
 import os
 import threading
 import requests
+import sys
 
 app = Flask(__name__)
 
@@ -15,14 +16,16 @@ base_url = "http://stock_price:8080/stockPrice/"
 def callback(ch, method, properties, body):
 	symbol = str(body, 'utf-8')
 	url = base_url + symbol
-	print(" [x] Received %r" % body)
+	print("Received stock %r" % body)
 	resp = requests.get(url)
 	status = resp.status_code
 	if status == 200 or status == 304:
-		print('Received response')
+		print('status code: ', status)
+		js = resp.json()
+		print("Received response %r" % js)
 	else:
 		print('Error status code: ', status)
-
+	sys.stdout.flush()
 
 def consume():
 	print('Consuming stocks')
@@ -42,7 +45,6 @@ def consume():
 
 def consumeStocks():
 	print("Starting a thread")
-	sys.stdout.flush()
 	t = threading.Thread(target=consume)
 	t.start()
 
