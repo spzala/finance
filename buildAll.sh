@@ -18,6 +18,11 @@ cd stock_table_get
 ./build.sh
 cd ..
 
+echo Building stock table set
+cd stock_table_set
+./build.sh
+cd ..
+
 echo Building stock spreadsheet
 cd stock_spreadsheet
 ./build.sh
@@ -33,8 +38,8 @@ cd stock_price
 ./build.sh
 cd ..
 
-echo Building consume stock symbol
-cd consume_stock_symbol
+echo Building process stock symbol
+cd process_stock_symbol
 ./build.sh
 cd ..
 

@@ -25,8 +25,8 @@ function retrieveStocks (ch, q) {
         stocksStr = data.toString('utf8')
         stocks = JSON.parse(stocksStr)
         console.log ("Stocks length: " + stocks.length)
-//        for (var i = 0; i < stocks.length; i++) {   
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < stocks.length; i++) {   
+//        for (var i = 0; i < 20; i++) {
             retrieveStock(ch, q, stocks[i])
         }
     });

@@ -5,7 +5,6 @@ import pika
 import os
 import threading
 import requests
-import time
 
 app = Flask(__name__)
 
@@ -20,7 +19,7 @@ def callback(ch, method, properties, body):
 	resp = requests.get(url)
 	status = resp.status_code
 	if status == 200 or status == 304:
-		print("Received response: %r" % resp.text)
+		print('Received response')
 	else:
 		print('Error status code: ', status)
 
@@ -42,6 +41,8 @@ def consume():
 
 
 def consumeStocks():
+	print("Starting a thread")
+	sys.stdout.flush()
 	t = threading.Thread(target=consume)
 	t.start()
 
