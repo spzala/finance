@@ -5,6 +5,7 @@ import pika
 import os
 import threading
 import requests
+import time
 
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ def callback(ch, method, properties, body):
 	resp = requests.get(url)
 	status = resp.status_code
 	if status == 200 or status == 304:
-		print('Received response')
+		print("Received response: %r" % resp.text)
 	else:
 		print('Error status code: ', status)
 
@@ -53,5 +54,7 @@ def processStocks():
 def index():
     return 'Index Page'
 
+print ("Welcome to process stock")
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
+
