@@ -72,6 +72,8 @@ services:
       - "5000"
     depends_on:
       - queue
+      - stock_price
+      - stock_table_set
     environment:
       - QUEUE_HOST=queue
 

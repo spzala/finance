@@ -13,6 +13,21 @@ channel_name = "stocks"
 
 base_url = "http://stock_price:8080/stockPrice/"
 
+set_url = "http://stock_table_set:8080/"
+
+def setStockPrice(js):
+	stock = js['symbol']
+	price = js['price']
+	print("Calling setStockPrice with stock: ", stock, " price: ", price)
+	sys.stdout.flush()
+	url = set_url + stock + "/" + str(price)
+	resp = requests.get(url)
+	status = resp.status_code
+	if status == 200 or status == 304:
+		print('status code: ', status)
+	else:
+		print('Error status code: ', status)
+
 def callback(ch, method, properties, body):
 	symbol = str(body, 'utf-8')
 	url = base_url + symbol
@@ -23,6 +38,7 @@ def callback(ch, method, properties, body):
 		print('status code: ', status)
 		js = resp.json()
 		print("Received response %r" % js)
+		setStockPrice(js)
 	else:
 		print('Error status code: ', status)
 	sys.stdout.flush()
