@@ -21,7 +21,8 @@ function createDBConnection () {
 }
 
 function retrieveStocks (res) {
-    connection.query ("SELECT * FROM STOCK WHERE LAST_PRICE < 10 ORDER BY LAST_PE", 
+    connection.query ("SELECT * FROM STOCK WHERE LAST_PRICE < 10 " + 
+        "ORDER BY LAST_PE DESC", 
         function (error, result, fields) {
         if (error) {
             console.log ("Error: " + error)

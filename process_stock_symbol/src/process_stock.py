@@ -27,6 +27,7 @@ def setStockPrice(js):
 	url = set_url + stock
 	payload = { "price": price, "pe": pe }
 
+	print("url: ", url, " payload: ", payload)
 	resp = requests.post(url, data = payload)
 	status = resp.status_code
 	if status == 200 or status == 304:
