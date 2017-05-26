@@ -18,10 +18,16 @@ set_url = "http://stock_table_set:8080/"
 def setStockPrice(js):
 	stock = js['symbol']
 	price = js['price']
-	print("Calling setStockPrice with stock: ", stock, " price: ", price)
+	pe = js['pe']
+
+	print("Calling setStockPrice with stock: ", 
+		stock, " price: ", price, " pe: ", pe)
+
 	sys.stdout.flush()
-	url = set_url + stock + "/" + str(price)
-	resp = requests.get(url)
+	url = set_url + stock
+    payload = { "price": price, "pe" : pe}
+
+	resp = requests.post(url, data = payload)
 	status = resp.status_code
 	if status == 200 or status == 304:
 		print('status code: ', status)

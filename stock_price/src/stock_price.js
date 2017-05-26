@@ -6,14 +6,14 @@ function retrieveStockPrice (stock, res) {
 
     yahooFinance.snapshot ({
         symbol : stock,
-        fields: ['a', 'b', 'b2', 'b3']
+        fields: ['a', 'b', 'b2', 'b3', 'r']
     }, function (err, snapshot) {
         console.log ("Got response snapshot: " + util.inspect(snapshot))
         if (err) {
             console.log ("Error during retrieveStockPrice for stock: " + stock + ":" + err)
         }
         if (snapshot != undefined && snapshot.ask != null) {
-            res.json ({symbol: snapshot.symbol, price: snapshot.ask})
+            res.json ({symbol: snapshot.symbol, price: snapshot.ask, pe: snapshot.peRatio})
         } else {
             res.status(404).send ("Symbol not found: " + stock)
         }

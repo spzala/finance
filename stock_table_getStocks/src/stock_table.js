@@ -21,7 +21,7 @@ function createDBConnection () {
 }
 
 function retrieveStocks (res) {
-    connection.query ("SELECT * FROM STOCK", 
+    connection.query ("SELECT * FROM STOCK WHERE LAST_PRICE < 10", 
         function (error, result, fields) {
         if (error) {
             console.log ("Error: " + error)
