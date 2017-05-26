@@ -25,7 +25,7 @@ def setStockPrice(js):
 
 	sys.stdout.flush()
 	url = set_url + stock
-    payload = { "price": price, "pe" : pe}
+	payload = { "price": price, "pe": pe }
 
 	resp = requests.post(url, data = payload)
 	status = resp.status_code
