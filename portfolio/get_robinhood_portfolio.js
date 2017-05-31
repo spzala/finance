@@ -62,7 +62,8 @@ module.exports = {
 
         Robinhood = robinhood(credentials, function(){
 
-            console.log ("Logging in to Robinhood username: " + credentials["username"] + " password: " + credentials["password"])
+            console.log ("Logging in to Robinhood username: " + 
+                credentials["username"] + " password: " + credentials["password"])
 
             //Robinhood is connected and you may begin sending commands to the api.
             Robinhood.accounts(function(err, response, body){
